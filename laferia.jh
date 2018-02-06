@@ -1,0 +1,118 @@
+entity Usuario{
+	 idUsuario Integer	,
+ 	 nombreUsuario	String 
+}
+entity Cliente{
+	idCliente Integer,
+    idUsuario Integer
+}
+entity Direccion{
+	idDireccion Integer, 
+    ubicacion String,
+    calle String,
+    numero Integer,
+    dpto String,
+    poblacion String,
+    idComuna Integer
+}
+entity Comercio{
+	idComercio Integer,
+    nombreComercio String
+    idUsuario Integer,
+    idDireccion Integer
+}
+entity Repartidor{
+	idRepartidor Integer,
+    nombreRepartidor String,
+    idUsuario Integer
+}
+entity Sucursal{
+	idSucursal Integer,
+    nombreSucursal String,
+    idComercio Integer,
+    idMercado Integer
+}
+entity Mercado{
+	idMercado Integer,
+    nombreMercado String,
+    ubicacion String
+}
+entity Producto{
+	idProducto Integer,
+    nombreProducto String
+}
+entity Stock{
+	idStock Integer,
+    nombreStock String,
+    idSucursal Integer,
+}
+entity StockProducto{
+	idStockProducto Integer,
+    idStock Integer,
+    idProducto String,
+    cantidad Integer
+}
+entity Carro{
+	idCarro Integer,
+    idCliente Integer,
+    idMercado Integer,
+    idMedioPago Integer,
+    fecha String
+}
+entity CarroProductos{
+	idCarro Integer,
+    idStockProducto Integer,
+    precio Integer,
+    descuento Integer
+    idDireccionCliente Integer
+}
+entity MedioPago{
+	idMedioPago Integer,
+    nombreMedioPago String
+}
+entity Ruta{
+	idRuta Integer,
+    nombreRuta Integer,
+    ubicacionOrigen String,
+    ubicacionDestino String
+}
+entity Vehiculo{
+	idVehiculo Integer,
+    idRepartidor Integer,
+    nombreVehiculo String,
+    patente String,
+    consumo String
+}
+entity Entrega{
+	idEntrega Integer, 
+    idVehiculo Integer,
+    idRuta Integer
+}
+entity ListaEntrega{
+	idListaEntrega Integer,
+    idCarro Integer,
+    unbicacion String,
+    
+}
+relationship OneToMany {
+	Repartidor{idUsuario} to Usuario
+    Cliente{idUsuario} to Usuario
+    Comercio{idUsuario} to Usuario
+    ListaEntrega{idEntrega} to Entrega,
+    Entrega{idVehiculo} to Vehiculo,
+    Vehiculo{idRepartidor} to Repartidor,
+    Entrega{idRuta} to Ruta,
+    ListaEntrega{idCarro} to Carro
+    Carro{idCliente} to Cliente
+    Carro{idMercado} to Mercado
+    Carro{idMedioPago} to MedioPago
+    CarroProductos{idCarro} to Carro
+    CarroProductos{idStockProducto} to StockProducto
+    StockProducto{idProducto} to Producto
+    StockProducto{idStock} to Stock
+    Stock{idSucursal} to Sucursal
+    Sucursal{idComercio} to Comercio
+    Sucursal{idMecado} to Mercado
+    
+    
+}
